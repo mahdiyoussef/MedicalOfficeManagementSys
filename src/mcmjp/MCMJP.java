@@ -22,9 +22,9 @@ public class MCMJP {
         ResultSet rst;
         Statement st;
         st=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-        rst=st.executeQuery("select count(*) from medcine");
+        rst=st.executeQuery("select count(*) as n from medcine");
         while(rst.next()) {
-            System.out.println(rst.getInt(1));
+            System.out.println(rst.getInt("n"));
         }
         
     }

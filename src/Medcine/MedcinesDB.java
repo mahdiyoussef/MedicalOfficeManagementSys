@@ -19,7 +19,7 @@ public class MedcinesDB implements MedcinesDAO {
     private Statement St;
     private ResultSet rst;
     private int NumberMd=0;
-    public MedcinesDB() throws SQLException{
+    public MedcinesDB(){
         try{
             DB =DBConnection.getInstance();
             St=DB.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -85,6 +85,20 @@ public class MedcinesDB implements MedcinesDAO {
             System.out.println(ex.getMessage());
         }
         return n;
+    }
+
+    @Override
+    public Medcine MedcineById(int id) {
+        Medcine M=null;
+        try {
+            rst=St.executeQuery("select * from medcine where id="+id);
+            while(rst.next()){
+                M=new Medcine(rst.getInt("id"),rst.getInt("version"),rst.getString("titre").charAt(0),rst.getString("nom").charAt(0),rst.getString("prenom").charAt(0));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return M;
     }
     
 }

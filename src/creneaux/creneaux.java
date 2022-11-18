@@ -61,13 +61,13 @@ public class creneaux {
     public void setMDebut(int MD){
         this.MDebut=MD;
     }
-    public void getHFin(int HF){
+    public void setHFin(int HF){
         this.HFin=HF;
     }
     public void setMFin(int MF){
         this.MFin=MF;
     }
-    public void getMedcine(Medcine m){
+    public void setMedcine(Medcine m){
         this.medcine=m;
     }
 }

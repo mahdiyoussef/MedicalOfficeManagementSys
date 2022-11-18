@@ -17,4 +17,5 @@ public interface MedcinesDAO {
     public void deleteMedcine(Medcine m);
     public ArrayList<Medcine> AllMedcines();
     public int numberOfMedcines();
+    public Medcine MedcineById(int id);
 }
