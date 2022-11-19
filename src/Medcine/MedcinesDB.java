@@ -32,7 +32,8 @@ public class MedcinesDB implements MedcinesDAO {
     @Override
     public  void addMedicines(Medcine m) {
         try {
-            St.executeUpdate("insert into medcine values("+m.getId()+","+m.getVersion()+",'"+m.getTitre()+"','"+m.getNom()+"','"+m.getPrenom()+"'");
+            St.executeUpdate("insert into medcine values("+m.getId()+","+m.getVersion()+",'"+m.getTitre()+"','"+m.getNom()+"','"+m.getPrenom()+"')");
+            System.out.println("Added");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -60,12 +61,19 @@ public class MedcinesDB implements MedcinesDAO {
     }
 
     @Override
-    public ArrayList<Medcine> AllMedcines() {
-        ArrayList<Medcine> medcines = new ArrayList<Medcine>();
+    public String[][] AllMedcines() {
+        String[][] medcines = new String[numberOfMedcines()][];
+        int it=0;
         try{
             rst=St.executeQuery("select * from medcine");
             while(rst.next()){
-                medcines.add(new MedcinesDB().MedcineById(rst.getInt("id")));
+                medcines[it]=new String[]{
+                    String.valueOf(rst.getInt("id")),
+                    String.valueOf(rst.getInt("version")),
+                    rst.getString("titre"),
+                    rst.getString("nom"),rst.getString("prenom")
+                };
+                it++;
             }
         }
         catch(Exception e){
@@ -93,7 +101,7 @@ public class MedcinesDB implements MedcinesDAO {
         try {
             rst=St.executeQuery("select * from medcine where id="+id);
             while(rst.next()){
-                M=new Medcine(rst.getInt("id"),rst.getInt("version"),rst.getString("titre").charAt(0),rst.getString("nom").charAt(0),rst.getString("prenom").charAt(0));
+                M=new Medcine(rst.getInt("id"),rst.getInt("version"),rst.getString("titre"),rst.getString("nom"),rst.getString("prenom"));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -5,6 +5,7 @@
  */
 package rv;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -18,4 +19,5 @@ public interface rvDAO {
     public rv rvById(int id);
     public ArrayList<rv> AllRv();
     public int rvNumber();
+    public String[][] fullAppointement();
 }

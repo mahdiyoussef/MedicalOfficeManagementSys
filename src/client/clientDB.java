@@ -38,7 +38,7 @@ public class clientDB implements clientDAO{
     @Override
     public void addClient(client m) {
         try {
-            St.executeUpdate("insert into client values("+m.getId()+","+m.getVersion()+",'"+m.getTitre()+"','"+m.getNom()+"','"+m.getPrenom()+"'");
+            St.executeUpdate("insert into client values("+m.getId()+","+m.getVersion()+",'"+m.getTitre()+"','"+m.getNom()+"','"+m.getPrenom()+"')");
             System.out.println("added");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -67,12 +67,22 @@ public class clientDB implements clientDAO{
     }
 
     @Override
-    public ArrayList<client> AllClients() {
-        ArrayList<client> clients = new ArrayList<client>();
+    public String[][] AllClients() {
+        int n=numberOfClients();
+        String[][] clients = new String[n][];
+        int it=0;
+        boolean b=true;
         try{
-            rst=St.executeQuery("select * from client");
+            rst=St.executeQuery("select * from client order by id");
             while(rst.next()){
-                clients.add(new clientDB().clientById(rst.getInt("id")));
+                clients[it]=new String[]{
+                    String.valueOf(rst.getInt("id")),
+                    String.valueOf(rst.getInt("version")),
+                    rst.getString("titre"),
+                    rst.getString("nom"),rst.getString("prenom")
+                };
+                it++;
+                
             }
         }
         catch(Exception e){
@@ -101,7 +111,7 @@ public class clientDB implements clientDAO{
         try {
             rst=St.executeQuery("select * from client where id="+id);
             while(rst.next()){
-                c=new client(rst.getInt("id"),rst.getInt("version"),rst.getString("titre").charAt(0),rst.getString("nom").charAt(0),rst.getString("prenom").charAt(0));
+                c=new client(rst.getInt("id"),rst.getInt("version"),rst.getString("titre"),rst.getString("nom"),rst.getString("prenom"));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

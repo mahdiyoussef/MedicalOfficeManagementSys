@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.net.URL;
 import java.text.DateFormat;
@@ -22,7 +23,7 @@ import javax.swing.border.Border;
  */
 public class addappointment extends JFrame {
     JTextField patient,doctor;
-    JFormattedTextField AppointementDate,AppointementTime,AppointementTime1;
+    JFormattedTextField AppointementDate,AppointementTime,AppointementTime1,AppointementTime2,AppointementTime3;
     JButton addApp;
     public addappointment(){
         JPanel Header =new JPanel();
@@ -56,24 +57,43 @@ public class addappointment extends JFrame {
         Format Time = DateFormat.getTimeInstance(DateFormat.SHORT);
         AppointementTime = new JFormattedTextField(Time);
         AppointementTime.setMaximumSize(new Dimension(1000,60));
-        AppointementTime.setText("Start Hour");
+        AppointementTime.setText("Client Start Hour");
         AppointementTime.setHorizontalAlignment(JFormattedTextField.CENTER);
         
         
         AppointementTime1 = new JFormattedTextField(Time);
         AppointementTime1.setMaximumSize(new Dimension(1000,60));
-        AppointementTime1.setText("Start Hour");
+        AppointementTime1.setText("client End Hour");
         AppointementTime1.setHorizontalAlignment(JFormattedTextField.CENTER);
+        
+        AppointementTime2 = new JFormattedTextField(Time);
+        AppointementTime2.setMaximumSize(new Dimension(1000,60));
+        AppointementTime2.setText("Medcine Start Hour");
+        AppointementTime2.setHorizontalAlignment(JFormattedTextField.CENTER);
+        
+        
+        AppointementTime3 = new JFormattedTextField(Time);
+        AppointementTime3.setMaximumSize(new Dimension(1000,60));
+        AppointementTime3.setText("Medcine End Hour");
+        AppointementTime3.setHorizontalAlignment(JFormattedTextField.CENTER);
+        
         
         addApp=new JButton("Add");
         addApp.setMinimumSize(new Dimension(1000,60));
         addApp.setPreferredSize(new Dimension(1000,60));
+        // add event listener to add button
+        
         
         Body.add(patient,BorderLayout.EAST);
         Body.add(doctor);
         Body.add(AppointementDate);
         Body.add(AppointementTime);
-        Body.add(addApp);
+        Body.add(AppointementTime1);
+        Body.add(AppointementTime2);
+        Body.add(AppointementTime3);
+        Footer.add(addApp);
+        
+        Body.setLayout(new FlowLayout(FlowLayout.CENTER));
         Body.setLayout(new BoxLayout(Body, BoxLayout.Y_AXIS));
         Body.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         Body.setBackground(Color.white);

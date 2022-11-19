@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mcmjp;
+package main;
 
 import Screens.*;
 import java.sql.*;
@@ -13,14 +13,18 @@ import login.loginDB;
  *
  * @author AZA
  */
-public class MCMJP {
+public class main {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException {
-        String l =new loginDB().getUser("admin").getUsername();
-        System.out.println(l);
+    public static void main(String[] args){
+        try {
+            new AllMedcines();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
     }
     
 }

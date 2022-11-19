@@ -86,7 +86,41 @@ public class rvDB implements rvDAO{
 
     @Override
     public int rvNumber() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int n=0;
+        try {
+            RS=St.executeQuery("select count(*) as n from rv");
+            while(RS.next()){
+                n=RS.getInt("n");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return n;
+    }
+
+    @Override
+    public String[][] fullAppointement() {
+        String[][] data=null;
+        int it=0;
+        try {
+            int n=rvNumber();
+            RS=St.executeQuery("select r.id as rid,r.jour as rjour ,c.hdebut as chdebut,c.hfin as chfin,c.mdebut as cmdebut,c.mfin as cmfin,cl.nom+' '+cl.prenom as clientfullname,md.nom+' '+md.prenom as medcinefullname from rv r,creneaux c,client cl,medcine md where r.id_creneaux =c.id and r.id_client=cl.id and c.id_medcine=md.id");
+            data=new String[8][n];
+            while(RS.next()){
+                data[it][0]=String.valueOf(RS.getInt("rid"));
+                data[it][1]=RS.getString("rjour");
+                data[it][2]=String.valueOf(RS.getInt("chdebut"));
+                data[it][3]=String.valueOf(RS.getInt("chfin"));
+                data[it][4]=String.valueOf(RS.getInt("cmedbut"));
+                data[it][5]=String.valueOf(RS.getInt("cmfin"));
+                data[it][6]=RS.getString("clientfullname");
+                data[it][7]=RS.getString("medcinefullname");
+                it++;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return data;
     }
     
 }

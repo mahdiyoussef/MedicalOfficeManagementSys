@@ -16,7 +16,7 @@ public interface clientDAO {
     public void addClient(client m);
     public void updateClient(client m);
     public void deleteClient(client m);
-    public ArrayList<client> AllClients();
+    public String[][] AllClients();
     public int numberOfClients();
     public client clientById(int id);
 }

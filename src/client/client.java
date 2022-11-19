@@ -10,10 +10,10 @@ package client;
  * @author AZA
  */
 public class client {
-    private char nom,prenom,titre;
+    private String nom,prenom,titre;
     private int id,version;
     //constructor
-    public client(int id,int version,char titre,char nom,char prenom){
+    public client(int id,int version,String titre,String nom,String prenom){
         this.id=id;
         this.version=version;
         this.nom=nom;
@@ -27,13 +27,13 @@ public class client {
     public int getId(){
         return id;
     }
-    public char getNom(){
+    public String getNom(){
         return nom;
     }
-    public char getPrenom(){
+    public String getPrenom(){
         return prenom;
     }
-    public char getTitre(){
+    public String getTitre(){
         return titre;
     }
     //setters
@@ -43,13 +43,13 @@ public class client {
     public void setId(int id){
         this.id=id;
     }
-    public void setNom(char n){
+    public void setNom(String n){
         this.nom=n;
     }
-    public void setPrenom(char p){
+    public void setPrenom(String p){
         this.prenom=p;
     }
-    public void setTitre(char t){
+    public void setTitre(String t){
         this.titre=t;
     }
 }
