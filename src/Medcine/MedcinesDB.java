@@ -65,7 +65,7 @@ public class MedcinesDB implements MedcinesDAO {
         try{
             rst=St.executeQuery("select * from medcine");
             while(rst.next()){
-                medcines.add(new Medcine(rst.getInt("id"),rst.getInt("version"),rst.getString("titre").charAt(0),rst.getString("nom").charAt(0),rst.getString("prenom").charAt(0)));
+                medcines.add(new MedcinesDB().MedcineById(rst.getInt("id")));
             }
         }
         catch(Exception e){

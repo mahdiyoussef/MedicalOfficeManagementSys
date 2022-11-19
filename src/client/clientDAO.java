@@ -18,4 +18,5 @@ public interface clientDAO {
     public void deleteClient(client m);
     public ArrayList<client> AllClients();
     public int numberOfClients();
+    public client clientById(int id);
 }

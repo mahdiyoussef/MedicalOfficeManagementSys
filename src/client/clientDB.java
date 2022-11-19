@@ -72,7 +72,7 @@ public class clientDB implements clientDAO{
         try{
             rst=St.executeQuery("select * from client");
             while(rst.next()){
-                clients.add(new client(rst.getInt("id"),rst.getInt("version"),rst.getString("titre").charAt(0),rst.getString("nom").charAt(0),rst.getString("prenom").charAt(0)));
+                clients.add(new clientDB().clientById(rst.getInt("id")));
             }
         }
         catch(Exception e){
@@ -93,6 +93,20 @@ public class clientDB implements clientDAO{
             System.out.println(ex.getMessage());
         }
         return n;
+    }
+
+    @Override
+    public client clientById(int id) {
+        client c=null;
+        try {
+            rst=St.executeQuery("select * from client where id="+id);
+            while(rst.next()){
+                c=new client(rst.getInt("id"),rst.getInt("version"),rst.getString("titre").charAt(0),rst.getString("nom").charAt(0),rst.getString("prenom").charAt(0));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return c;
     }
     
     

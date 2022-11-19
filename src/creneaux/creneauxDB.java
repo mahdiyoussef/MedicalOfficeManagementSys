@@ -62,12 +62,11 @@ public class creneauxDB implements creneauxDAO{
     @Override
     public ArrayList<creneaux> AllCreneaux() {
         ArrayList<creneaux> list =new ArrayList<creneaux>();
-        Medcine m = null;
         try {
             RS=St.executeQuery("select * from creneaux");
             while(RS.next()){
-                m=MD.MedcineById(RS.getInt("id_medcine"));
-                list.add(new creneaux(RS.getInt("id"),RS.getInt("version"),RS.getInt("hdebut"),RS.getInt("mdebut"),RS.getInt("hfin"),RS.getInt("mfin"),m));
+                
+                list.add(new creneauxDB().searchCreneau(RS.getInt("id")));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
