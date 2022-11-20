@@ -50,8 +50,12 @@ public class rvDB implements rvDAO{
     @Override
     public void deleteRv(rv rv) {
         try {
+            System.out.println(rv.getCreneaux().getId());
+            //St.executeUpdate("delete from creneaux where ID="+rv.getCreneaux().getId());
             St.executeUpdate("delete from rv where id="+rv.getId());
+            St.executeUpdate("commit");
         } catch (Exception e) {
+            System.out.println("function problem");
             System.out.println(e.getMessage());
         }
     }
@@ -62,9 +66,10 @@ public class rvDB implements rvDAO{
         try {
             RS=St.executeQuery("select * from rv where id="+id);
             while(RS.next()){
-                rv=new rv(RS.getInt("id"),RS.getString("date").charAt(0),new clientDB().clientById(RS.getInt("id_client")),new creneauxDB().searchCreneau(RS.getInt("id_creneaux")));
+                rv=new rv(RS.getInt("id"),RS.getString("jour"),new clientDB().clientById(RS.getInt("id_client")),new creneauxDB().searchCreneau(RS.getInt("id_creneaux")));
             }
         } catch (Exception e) {
+            System.out.println("Constructor by id");
             System.out.println(e.getMessage());
         }
         return rv;
@@ -100,22 +105,26 @@ public class rvDB implements rvDAO{
 
     @Override
     public String[][] fullAppointement() {
-        String[][] data=null;
+        int n=rvNumber();
+        String[][] data=new String[n][];
         int it=0;
         try {
-            int n=rvNumber();
-            RS=St.executeQuery("select r.id as rid,r.jour as rjour ,c.hdebut as chdebut,c.hfin as chfin,c.mdebut as cmdebut,c.mfin as cmfin,cl.nom+' '+cl.prenom as clientfullname,md.nom+' '+md.prenom as medcinefullname from rv r,creneaux c,client cl,medcine md where r.id_creneaux =c.id and r.id_client=cl.id and c.id_medcine=md.id");
-            data=new String[8][n];
+            
+            RS=St.executeQuery("select r.id as rid,r.jour as rjour ,c.hdebut as chdebut,c.hfin as chfin,c.mdebut as cmdebut,c.mfin as cmfin,cl.nom ||' ' ||cl.prenom as clientfullname,md.nom||' ' ||md.prenom as medcinefullname from rv r,creneaux c,client cl,medcine md where r.id_creneaux =c.id and r.id_client=cl.id and c.id_medcine=md.id");
             while(RS.next()){
-                data[it][0]=String.valueOf(RS.getInt("rid"));
-                data[it][1]=RS.getString("rjour");
-                data[it][2]=String.valueOf(RS.getInt("chdebut"));
-                data[it][3]=String.valueOf(RS.getInt("chfin"));
-                data[it][4]=String.valueOf(RS.getInt("cmedbut"));
-                data[it][5]=String.valueOf(RS.getInt("cmfin"));
-                data[it][6]=RS.getString("clientfullname");
-                data[it][7]=RS.getString("medcinefullname");
+                data[it]=new String[]{
+                    String.valueOf(RS.getInt("RID")),
+                    RS.getString("RJOUR"),
+                    String.valueOf(RS.getInt("CHDEBUT")),
+                    String.valueOf(RS.getInt("CHFIN")),
+                    String.valueOf(RS.getInt("CMDEBUT")),
+                    String.valueOf(RS.getInt("CMFIN")),
+                    RS.getString("CLIENTFULLNAME"),
+                    RS.getString("MEDCINEFULLNAME")
+                };
+                
                 it++;
+                
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

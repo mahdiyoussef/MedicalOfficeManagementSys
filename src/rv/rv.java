@@ -15,11 +15,11 @@ import creneaux.creneaux;
  */
 public class rv {
     private int id;
-    private char date;
+    private String date;
     private client c;
     private creneaux cr;
     
-    public rv(int id,char date,client c,creneaux cr){
+    public rv(int id,String date,client c,creneaux cr){
         this.id=id;
         this.c=c;
         this.cr=cr;
@@ -29,7 +29,7 @@ public class rv {
     public int getId(){
         return id;
     }
-    public char getDate(){
+    public String getDate(){
         return date;
     }
     public client getClient(){
@@ -39,7 +39,7 @@ public class rv {
         return cr;
     }
     //setters
-    public void setDate(char date){
+    public void setDate(String date){
         this.date=date;
     }
     public void setClient(client c){

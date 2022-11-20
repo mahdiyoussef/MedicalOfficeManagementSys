@@ -19,7 +19,7 @@ public class creneaux {
     private int HFin;
     private int MFin;
     private Medcine medcine;
-    creneaux(int id,int version,int HD,int MD,int HF,int MF,Medcine m){
+    public creneaux(int id,int version,int HD,int MD,int HF,int MF,Medcine m){
         this.id=id;
         this.version=version;
         this.HDebut=HD;

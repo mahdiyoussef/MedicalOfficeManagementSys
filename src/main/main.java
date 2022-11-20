@@ -20,7 +20,7 @@ public class main {
      */
     public static void main(String[] args){
         try {
-            new AllMedcines();
+            new Dashboard();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

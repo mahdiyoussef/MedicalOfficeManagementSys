@@ -33,6 +33,7 @@ public class MedcinesDB implements MedcinesDAO {
     public  void addMedicines(Medcine m) {
         try {
             St.executeUpdate("insert into medcine values("+m.getId()+","+m.getVersion()+",'"+m.getTitre()+"','"+m.getNom()+"','"+m.getPrenom()+"')");
+            St.executeUpdate("commit");
             System.out.println("Added");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -43,6 +44,7 @@ public class MedcinesDB implements MedcinesDAO {
     public void updateMedcine(Medcine m) {               
         try {
             St.executeUpdate("update medcine set version="+m.getVersion()+",titre='"+m.getTitre()+"',nom='"+m.getNom()+"',prenom='"+m.getPrenom()+"' where id="+m.getId());
+            St.executeUpdate("commit");
             System.out.println(m.getId()+" is updated");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -52,7 +54,9 @@ public class MedcinesDB implements MedcinesDAO {
     @Override
     public void deleteMedcine(Medcine m) {
         try{
+            St.executeUpdate("delete from creneaux where id_medcine="+m.getId());
             St.executeUpdate("delete from medcine where id="+m.getId());
+            St.executeUpdate("commit");
             System.out.println(m.getId()+" is deleted");
         }
         catch(Exception e){

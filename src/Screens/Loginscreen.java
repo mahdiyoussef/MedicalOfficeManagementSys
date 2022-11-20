@@ -7,14 +7,17 @@ package Screens;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import javax.swing.*;
+import login.loginDB;
 
 /**
  *
  * @author AZA
  */
-public class login extends JFrame {
+public class Loginscreen extends JFrame {
     // logos
     
     // Login inputs 
@@ -23,17 +26,13 @@ public class login extends JFrame {
     JLabel LoginMessage;
     // login button
     JButton login;
-    public login(){
+    public Loginscreen(){
         URL Applogourl=getClass().getResource("/Assets/applogo.png");
         URL Thumbnailurl=getClass().getResource("/Assets/thumbnail.png");
         JPanel Header=new JPanel();
         JPanel Body=new JPanel();
         JPanel Footer=new JPanel();
-        JPanel Body_JTF1=new JPanel();
-        JPanel Body_JTF2=new JPanel();
-        JPanel Body_BTN=new JPanel();
         JLabel FooterLabel=new JLabel();
-        FooterLabel.setText("Developed By : Youssef Mahdi");
         FooterLabel.setVerticalAlignment(JLabel.CENTER);
         FooterLabel.setHorizontalAlignment(JLabel.CENTER);
         //logo
@@ -47,11 +46,11 @@ public class login extends JFrame {
         login=new JButton("Login");
         setIconImage(new ImageIcon(Thumbnailurl).getImage());
         // JTF Sizes
-        user.setMaximumSize(new Dimension(1000,30));
+        user.setMaximumSize(new Dimension(1000,60));
         pwd.setMaximumSize(new Dimension(1000,60));
         user.setHorizontalAlignment((int) JPanel.CENTER_ALIGNMENT);
         pwd.setHorizontalAlignment((int) JPanel.CENTER_ALIGNMENT);
-        
+        login.setPreferredSize(new Dimension(1000,60));
         
         
         // logo insertion
@@ -61,23 +60,25 @@ public class login extends JFrame {
         logolabel.setHorizontalAlignment(JLabel.CENTER);
         
         
-        //add items to JPanel
+        //add items to JPanel footer ,Body
         Header.add(logolabel);
-        //Body_JTF1.add(user);
-        //Body_JTF2.add(pwd);
-        //Body_BTN.add(login);
-        Body_JTF1.setLayout(new BoxLayout(Body_JTF1, BoxLayout.Y_AXIS));
-        //Body_JTF1.add(user);
-        //Body_JTF2.add(pwd);
-        //Body_BTN.add(login);
-        //Body_JTF1.setSize(JPanel.WIDTH,40);
-        Body_JTF1.add(user);
-        Body_JTF1.add(pwd);
-        Body_JTF1.add(login);
-        Body_JTF1.setBackground(new Color(255,255,255));
-        Body.add(Body_JTF1,BorderLayout.EAST);
-        Footer.add(FooterLabel);
+        Body.setLayout(new BoxLayout(Body, BoxLayout.Y_AXIS));
+        Body.add(user);
+        Body.add(pwd);
         
+        Body.setBackground(new Color(255,255,255));
+        
+        Footer.add(login);
+        
+        // add button to Actio listener
+        login.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                loginVerify();
+            }
+            
+        });
         
         Body.setBackground(new Color(255,255,255));
         Footer.setBackground(new Color(255,255,255));
@@ -92,5 +93,18 @@ public class login extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         
+    }
+    void loginVerify(){
+        loginDB logv=new loginDB();
+        try {
+            if(logv.checkLogin(user.getText(), pwd.getText())){
+                System.out.println("logged");
+            }
+            else{
+                System.out.println("unknown infos");
+            }
+        } catch (Exception e) {
+            
+        }
     }
 }

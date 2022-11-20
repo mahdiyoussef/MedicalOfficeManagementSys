@@ -34,7 +34,8 @@ public class creneauxDB implements creneauxDAO{
         int id;
         try{
             id=c.getMedcine().getId();
-            St.executeUpdate("insert into creneaux values("+c.getId()+","+c.getVersion()+","+c.getHDebut()+","+c.getMDebut()+","+c.getHFin()+","+c.getMFin()+","+id+");");
+            St.executeUpdate("insert into creneaux values("+c.getId()+","+c.getVersion()+","+c.getHDebut()+","+c.getMDebut()+","+c.getHFin()+","+c.getMFin()+","+id+")");
+            St.executeUpdate("commit");
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -44,6 +45,7 @@ public class creneauxDB implements creneauxDAO{
     public void updateCreneau(creneaux c) {
         try {
             St.executeUpdate("update creneaux set version="+c.getVersion()+" ,hdebut="+c.getHDebut()+" ,mdebut="+c.getMDebut()+",hfin="+c.getMDebut()+",mfin="+c.getMFin()+" ,id_medcine="+c.getMedcine().getId()+" where id="+c.getId());
+            St.executeUpdate("commit");
             System.out.println(c.getId()+" is updated succesfuly");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -54,6 +56,7 @@ public class creneauxDB implements creneauxDAO{
     public void deletecreneau(creneaux c) {
         try {
             St.executeUpdate("delete from creneaux where id="+c.getId());
+            St.executeUpdate("commit");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -86,6 +89,7 @@ public class creneauxDB implements creneauxDAO{
                 c=new creneaux(RS.getInt("id"),RS.getInt("version"),RS.getInt("hdebut"),RS.getInt("mdebut"),RS.getInt("hfin"),RS.getInt("mfin"),m);
             }
         } catch (Exception e) {
+            System.out.println("creneau problem");
             System.out.println(e.getMessage());
         }
         return c;

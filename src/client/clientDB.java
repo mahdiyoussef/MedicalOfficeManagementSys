@@ -39,6 +39,7 @@ public class clientDB implements clientDAO{
     public void addClient(client m) {
         try {
             St.executeUpdate("insert into client values("+m.getId()+","+m.getVersion()+",'"+m.getTitre()+"','"+m.getNom()+"','"+m.getPrenom()+"')");
+            St.executeUpdate("commit");
             System.out.println("added");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -49,6 +50,7 @@ public class clientDB implements clientDAO{
     public void updateClient(client m) {
         try {
             St.executeUpdate("update client set version="+m.getVersion()+",titre='"+m.getTitre()+"',nom='"+m.getNom()+"',prenom='"+m.getPrenom()+"' where id="+m.getId());
+            St.executeUpdate("commit");
             System.out.println(m.getId()+" is updated");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -58,7 +60,9 @@ public class clientDB implements clientDAO{
     @Override
     public void deleteClient(client m) {
         try{
-            St.executeUpdate("delete from medcine where id="+m.getId());
+            St.executeUpdate("delete from rv where id_client="+m.getId());
+            St.executeUpdate("delete from client where id="+m.getId());
+            St.executeUpdate("commit");
             System.out.println(m.getId()+" is deleted");
         }
         catch(Exception e){
@@ -115,6 +119,7 @@ public class clientDB implements clientDAO{
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("client problem");
         }
         return c;
     }

@@ -31,7 +31,15 @@ public class loginDB implements loginDAO{
     public boolean checkLogin(String username, String pwd) {
         boolean v=false;
         try {
-            Rs=St.executeQuery("select * from login where username="+username);
+            Rs=St.executeQuery("select * from login where username='"+username+"'");
+            while(Rs.next()){
+                System.out.println(pwd);
+                System.out.println(Rs.getString("pwd"));
+                if(pwd.equals(Rs.getString("pwd"))){
+                    System.out.println("logged");
+                    return true;
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -42,6 +50,7 @@ public class loginDB implements loginDAO{
     public void addUser(login l) {
         try {
             St.executeUpdate("isert into login values('"+l.getId()+"','"+l.getUsername()+"','"+l.getPwd()+"')");
+            St.executeUpdate("commit");
             System.out.println(l.getId()+"updated");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -52,6 +61,7 @@ public class loginDB implements loginDAO{
     public void updateUser(login l) {
         try {
             St.executeUpdate("update login set username="+l.getUsername()+" ,pwd="+l.getPwd()+" where id="+l.getId());
+            St.executeUpdate("commit");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
