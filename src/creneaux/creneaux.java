@@ -12,21 +12,9 @@ import Medcine.Medcine;
  * @author AZA
  */
 public class creneaux {
-    private int id;
-    private int version;
-    private int HDebut;
-    private int MDebut;
-    private int HFin;
-    private int MFin;
-    private Medcine medcine;
+    private int id;private int version;private int HDebut;private int MDebut;private int HFin;private int MFin;private Medcine medcine;
     public creneaux(int id,int version,int HD,int MD,int HF,int MF,Medcine m){
-        this.id=id;
-        this.version=version;
-        this.HDebut=HD;
-        this.MDebut=MD;
-        this.HFin=HF;
-        this.MFin=MF;
-        this.medcine=m;
+        this.id=id;this.version=version;this.HDebut=HD;this.MDebut=MD;this.HFin=HF;this.MFin=MF;this.medcine=m;
     }
     public int getId(){
         return id;

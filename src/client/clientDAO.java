@@ -5,7 +5,7 @@
  */
 package client;
 
-import Medcine.Medcine;
+
 import java.util.ArrayList;
 
 /**

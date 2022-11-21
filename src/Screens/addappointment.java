@@ -122,7 +122,7 @@ public class addappointment extends JFrame {
         add(Body,BorderLayout.CENTER);
         add(Footer,BorderLayout.SOUTH);
         // JFrame configuration
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Add an Appointement");
         setIconImage(new ImageIcon(Thumbnailurl).getImage());
         setSize(1280,720);

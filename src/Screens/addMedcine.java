@@ -101,7 +101,7 @@ public class addMedcine extends JFrame {
         add(Body,BorderLayout.CENTER);
         add(Footer,BorderLayout.SOUTH);
         URL Thumbnailurl=getClass().getResource("/Assets/thumbnail.png");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Add an Client");
         setIconImage(new ImageIcon(Thumbnailurl).getImage());
         setSize(1280,720);

@@ -26,6 +26,7 @@ public class Loginscreen extends JFrame {
     JLabel LoginMessage;
     // login button
     JButton login;
+    JLabel msg;
     public Loginscreen(){
         URL Applogourl=getClass().getResource("/Assets/applogo.png");
         URL Thumbnailurl=getClass().getResource("/Assets/thumbnail.png");
@@ -51,7 +52,7 @@ public class Loginscreen extends JFrame {
         user.setHorizontalAlignment((int) JPanel.CENTER_ALIGNMENT);
         pwd.setHorizontalAlignment((int) JPanel.CENTER_ALIGNMENT);
         login.setPreferredSize(new Dimension(1000,60));
-        
+        msg=new JLabel("");
         
         // logo insertion
         JLabel logolabel=new JLabel();
@@ -65,7 +66,7 @@ public class Loginscreen extends JFrame {
         Body.setLayout(new BoxLayout(Body, BoxLayout.Y_AXIS));
         Body.add(user);
         Body.add(pwd);
-        
+        Body.add(msg);
         Body.setBackground(new Color(255,255,255));
         
         Footer.add(login);
@@ -98,10 +99,11 @@ public class Loginscreen extends JFrame {
         loginDB logv=new loginDB();
         try {
             if(logv.checkLogin(user.getText(), pwd.getText())){
-                System.out.println("logged");
+                new Dashboard();
+                this.dispose();
             }
             else{
-                System.out.println("unknown infos");
+                msg.setText("unknown infos");
             }
         } catch (Exception e) {
             
